@@ -15,9 +15,8 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Todo List | Vibecode Deploy",
-  description:
-    "Красивый Todo List на Next.js с сохранением задач в localStorage",
+  title: "Today",
+  description: "Minimal liquid glass todo app",
 };
 
 export default function RootLayout({
