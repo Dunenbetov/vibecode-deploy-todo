@@ -29,7 +29,9 @@ export default function RootLayout({
       lang="ru"
       className={`${fraunces.variable} ${sourceSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-body">{children}</body>
+      <body className="min-h-full font-body selection:bg-[var(--accent-glow)]">
+        {children}
+      </body>
     </html>
   );
 }

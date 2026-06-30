@@ -35,24 +35,33 @@ export function TodoItem({ todo, onToggle, onEdit, onDelete }: TodoItemProps) {
   };
 
   return (
-    <li
-      className={`todo-item glass-chip group flex items-start gap-3 rounded-[1.4rem] px-4 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--border-strong)] ${
-        todo.completed ? "opacity-70" : ""
-      }`}
-    >
+    <li className="todo-item glass-row group flex items-start gap-3.5 px-4 py-3.5">
       <button
         type="button"
         onClick={() => onToggle(todo.id)}
-        aria-label={todo.completed ? "Отметить как активную" : "Отметить как выполненную"}
-        className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+        aria-label={
+          todo.completed ? "Отметить как активную" : "Отметить как выполненную"
+        }
+        className={`mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border-[1.5px] transition-all duration-200 ${
           todo.completed
-            ? "border-transparent bg-[var(--accent)] text-white shadow-[0_8px_22px_var(--accent-muted)]"
-            : "border-[var(--border-strong)] bg-[var(--surface-muted)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)]"
+            ? "scale-100 border-transparent bg-[var(--success)] text-white shadow-[0_4px_14px_rgba(52,199,89,0.35)]"
+            : "scale-100 border-[var(--rim-strong)] bg-transparent shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)] hover:border-[var(--accent)] hover:shadow-[0_0_0_4px_var(--accent-glow)]"
         }`}
       >
         {todo.completed && (
-          <svg aria-hidden="true" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          <svg
+            aria-hidden="true"
+            className="h-3 w-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.5 12.75l6 6 9-13.5"
+            />
           </svg>
         )}
       </button>
@@ -65,22 +74,22 @@ export function TodoItem({ todo, onToggle, onEdit, onDelete }: TodoItemProps) {
             onChange={(event) => setDraft(event.target.value)}
             onBlur={saveEdit}
             onKeyDown={handleKeyDown}
-            className="w-full rounded-xl border border-[var(--border-strong)] bg-[var(--surface-muted)] px-3 py-1.5 text-[var(--ink)] outline-none backdrop-blur-xl focus:ring-2 focus:ring-[var(--accent-ring)]"
+            className="w-full rounded-xl border border-[var(--rim-strong)] bg-[var(--surface-inset)] px-3 py-1.5 text-[var(--ink)] outline-none focus:ring-2 focus:ring-[var(--accent-ring)]"
           />
         ) : (
           <button
             type="button"
             onDoubleClick={() => setIsEditing(true)}
-            className={`w-full text-left text-base leading-relaxed transition-colors ${
+            className={`w-full text-left text-[16px] leading-[1.45] transition-colors ${
               todo.completed
-                ? "text-[var(--muted)] line-through"
+                ? "text-[var(--muted)] line-through decoration-[var(--rim)]"
                 : "text-[var(--ink)]"
             }`}
           >
             {todo.text}
           </button>
         )}
-        <p className="mt-1 text-xs text-[var(--muted)]">
+        <p className="mt-1 text-xs text-[var(--muted)] opacity-100 transition-opacity duration-200 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
           {new Date(todo.createdAt).toLocaleDateString("ru-RU", {
             day: "numeric",
             month: "short",
@@ -90,16 +99,27 @@ export function TodoItem({ todo, onToggle, onEdit, onDelete }: TodoItemProps) {
         </p>
       </div>
 
-      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
+      <div className="flex shrink-0 gap-1 opacity-100 transition-opacity duration-200 sm:opacity-60 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
         {!isEditing && (
           <button
             type="button"
             onClick={() => setIsEditing(true)}
             aria-label="Редактировать"
-            className="rounded-full p-2 text-[var(--muted)] transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--ink)]"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--surface-inset)] text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
           >
-            <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125" />
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.8}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125"
+              />
             </svg>
           </button>
         )}
@@ -107,10 +127,21 @@ export function TodoItem({ todo, onToggle, onEdit, onDelete }: TodoItemProps) {
           type="button"
           onClick={() => onDelete(todo.id)}
           aria-label="Удалить"
-          className="rounded-full p-2 text-[var(--muted)] transition-colors hover:bg-[var(--danger-soft)] hover:text-[var(--danger)]"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--surface-inset)] text-[var(--muted)] transition-colors hover:bg-[var(--danger-soft)] hover:text-[var(--danger)]"
         >
-          <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+          <svg
+            aria-hidden="true"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.8}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+            />
           </svg>
         </button>
       </div>

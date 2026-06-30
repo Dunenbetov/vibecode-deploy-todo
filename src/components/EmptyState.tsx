@@ -6,26 +6,26 @@ export function EmptyState({ filter }: EmptyStateProps) {
   const messages = {
     all: {
       title: "Чистый лист",
-      description: "Добавьте первую задачу — и начните свой день с ясности.",
+      description: "Добавьте задачу",
     },
     active: {
       title: "Всё выполнено",
-      description: "Активных задач нет. Отличная работа!",
+      description: "Нет активных",
     },
     completed: {
       title: "Пока пусто",
-      description: "Завершённые задачи появятся здесь.",
+      description: "Нет завершённых",
     },
   };
 
   const message = messages[filter];
 
   return (
-    <div className="empty-state flex flex-col items-center justify-center px-6 py-16 text-center">
-      <div className="glass-orb mb-5 flex h-16 w-16 items-center justify-center rounded-[1.5rem]">
+    <div className="empty-state flex flex-col items-center justify-center px-6 py-14 text-center">
+      <div className="glass-orb mb-5 flex h-14 w-14 items-center justify-center rounded-[1.35rem]">
         <svg
           aria-hidden="true"
-          className="h-7 w-7 text-[var(--accent)] drop-shadow-sm"
+          className="h-6 w-6 text-[var(--accent)] opacity-90"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -38,12 +38,10 @@ export function EmptyState({ filter }: EmptyStateProps) {
           />
         </svg>
       </div>
-      <h3 className="font-display text-2xl font-semibold tracking-[-0.04em] text-[var(--ink)]">
+      <h3 className="font-display text-xl font-semibold tracking-[-0.04em] text-[var(--ink)]">
         {message.title}
       </h3>
-      <p className="mt-2 max-w-xs text-sm leading-relaxed text-[var(--muted)]">
-        {message.description}
-      </p>
+      <p className="mt-2 text-sm text-[var(--muted)]">{message.description}</p>
     </div>
   );
 }

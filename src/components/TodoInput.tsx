@@ -24,14 +24,14 @@ export function TodoInput({ onAdd }: TodoInputProps) {
         type="text"
         value={value}
         onChange={(event) => setValue(event.target.value)}
-        placeholder="Что нужно сделать?"
+        placeholder="Новая задача"
         autoComplete="off"
-        className="glass-chip w-full rounded-[1.35rem] px-5 py-4 pr-28 text-base text-[var(--ink)] outline-none transition-all duration-300 placeholder:text-[var(--muted)] focus:border-[var(--border-strong)] focus:ring-4 focus:ring-[var(--accent-ring)]"
+        className="w-full rounded-[18px] border border-transparent bg-transparent py-3.5 pl-4 pr-[7.5rem] text-base text-[var(--ink)] outline-none transition-all duration-200 placeholder:text-[var(--muted)] focus:border-[var(--rim-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
       />
       <button
         type="submit"
         disabled={!value.trim()}
-        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-[1rem] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_28px_var(--accent-muted)] transition-all duration-300 hover:-translate-y-[52%] hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:-translate-y-1/2"
+        className="glass-accent-btn absolute right-1.5 top-1/2 -translate-y-1/2 rounded-[14px] px-4 py-2 text-[13px] font-semibold text-white disabled:cursor-not-allowed"
       >
         Добавить
       </button>

@@ -22,40 +22,44 @@ export function TodoApp() {
 
   if (!hydrated) {
     return (
-      <div className="flex min-h-[420px] items-center justify-center">
+      <div className="flex min-h-[420px] w-full items-center justify-center">
         <div className="glass-orb h-10 w-10 animate-pulse rounded-full" />
       </div>
     );
   }
 
   return (
-    <div className="todo-app mx-auto w-full max-w-3xl">
-      <header className="mb-7 flex items-center justify-between gap-4 px-2">
-        <div className="flex items-center gap-4">
-          <div aria-hidden="true" className="glass-orb h-16 w-16 rounded-[1.65rem]" />
+    <div className="todo-app w-full">
+      <header className="mb-8 flex items-end justify-between gap-4 px-1 sm:mb-10">
+        <div className="flex items-center gap-3.5">
+          <div
+            aria-hidden="true"
+            className="glass-orb h-12 w-12 shrink-0 rounded-[1.25rem]"
+          />
           <div>
-            <h1 className="font-display text-5xl font-semibold tracking-[-0.06em] text-[var(--ink)] sm:text-6xl">
-              Today
+            <p className="section-label mb-1">Today</p>
+            <h1 className="font-display text-[clamp(2.25rem,5vw,3rem)] font-semibold leading-none tracking-[-0.04em] text-[var(--ink)]">
+              Tasks
             </h1>
           </div>
         </div>
 
-        <div className="hidden gap-2 sm:flex">
-          <div className="glass-chip rounded-full px-4 py-2 text-sm text-[var(--muted)]">
-            <span className="font-semibold text-[var(--ink)]">{stats.active}</span> open
-          </div>
-          <div className="glass-chip rounded-full px-4 py-2 text-sm text-[var(--muted)]">
-            <span className="font-semibold text-[var(--ink)]">{stats.completed}</span> done
-          </div>
+        <div className="glass-stat px-4 py-2 text-[13px] text-[var(--muted)]">
+          <span className="font-semibold text-[var(--ink)]">{stats.active}</span>{" "}
+          open ·{" "}
+          <span className="font-semibold text-[var(--ink)]">{stats.completed}</span>{" "}
+          done
         </div>
       </header>
 
-      <div className="glass-panel overflow-hidden rounded-[2rem]">
-        <div className="relative z-10 border-b border-[var(--border)] px-5 py-5 sm:px-6">
-          <TodoInput onAdd={addTodo} />
+      <div className="glass-shell overflow-hidden">
+        <div className="relative z-10 px-5 pb-5 pt-5 sm:px-7 sm:pt-6">
+          <div className="glass-inset p-1">
+            <TodoInput onAdd={addTodo} />
+          </div>
         </div>
 
-        <ul className="relative z-10 space-y-3 px-5 py-5 sm:px-6">
+        <ul className="relative z-10 space-y-2.5 px-5 pb-5 sm:px-7">
           {todos.length === 0 ? (
             <EmptyState filter={filter} />
           ) : (
@@ -63,7 +67,7 @@ export function TodoApp() {
               <div
                 key={todo.id}
                 className="todo-enter"
-                style={{ animationDelay: `${index * 40}ms` }}
+                style={{ animationDelay: `${Math.min(index, 3) * 40}ms` }}
               >
                 <TodoItem
                   todo={todo}
@@ -76,28 +80,20 @@ export function TodoApp() {
           )}
         </ul>
 
-        <TodoFilters filter={filter} onChange={setFilter} stats={stats} />
+        <TodoFilters filter={filter} onChange={setFilter} />
 
         {stats.completed > 0 && (
-          <div className="relative z-10 border-t border-[var(--border)] px-5 py-3 text-right sm:px-6">
+          <div className="relative z-10 border-t border-[var(--rim)] px-5 py-3 text-right sm:px-7">
             <button
               type="button"
               onClick={clearCompleted}
-              className="rounded-full px-3 py-1.5 text-sm font-semibold text-[var(--danger)] transition-colors hover:bg-[var(--danger-soft)] hover:text-[var(--danger-hover)]"
+              className="rounded-full px-3 py-1.5 text-[13px] font-medium text-[var(--muted)] transition-colors hover:text-[var(--danger)]"
             >
               Очистить выполненные ({stats.completed})
             </button>
           </div>
         )}
       </div>
-
-      {stats.total > 0 && (
-        <footer className="mt-5 flex justify-center text-sm text-[var(--muted)] sm:hidden">
-          <div className="glass-chip rounded-full px-4 py-2">
-            {stats.active} open · {stats.completed} done
-          </div>
-        </footer>
-      )}
     </div>
   );
 }
