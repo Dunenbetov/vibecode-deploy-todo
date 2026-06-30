@@ -22,10 +22,10 @@ export function EmptyState({ filter }: EmptyStateProps) {
 
   return (
     <div className="empty-state flex flex-col items-center justify-center px-6 py-16 text-center">
-      <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-soft)]">
+      <div className="glass-orb mb-5 flex h-16 w-16 items-center justify-center rounded-[1.5rem]">
         <svg
           aria-hidden="true"
-          className="h-7 w-7 text-[var(--accent)]"
+          className="h-7 w-7 text-[var(--accent)] drop-shadow-sm"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -38,7 +38,9 @@ export function EmptyState({ filter }: EmptyStateProps) {
           />
         </svg>
       </div>
-      <h3 className="font-display text-xl text-[var(--ink)]">{message.title}</h3>
+      <h3 className="font-display text-2xl font-semibold tracking-[-0.04em] text-[var(--ink)]">
+        {message.title}
+      </h3>
       <p className="mt-2 max-w-xs text-sm leading-relaxed text-[var(--muted)]">
         {message.description}
       </p>

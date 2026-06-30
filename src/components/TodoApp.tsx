@@ -23,31 +23,39 @@ export function TodoApp() {
   if (!hydrated) {
     return (
       <div className="flex min-h-[420px] items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--accent-muted)] border-t-[var(--accent)]" />
+        <div className="glass-orb h-10 w-10 animate-pulse rounded-full" />
       </div>
     );
   }
 
   return (
-    <div className="todo-app mx-auto w-full max-w-2xl">
-      <header className="mb-8 text-center">
-        <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-[var(--accent)]">
-          Vibecode Deploy
-        </p>
-        <h1 className="font-display text-4xl font-normal tracking-tight text-[var(--ink)] sm:text-5xl">
-          Todo List
-        </h1>
-        <p className="mt-3 text-base text-[var(--muted)]">
-          Простой, красивый и надёжный список задач с сохранением в браузере
-        </p>
+    <div className="todo-app mx-auto w-full max-w-3xl">
+      <header className="mb-7 flex items-center justify-between gap-4 px-2">
+        <div className="flex items-center gap-4">
+          <div aria-hidden="true" className="glass-orb h-16 w-16 rounded-[1.65rem]" />
+          <div>
+            <h1 className="font-display text-5xl font-semibold tracking-[-0.06em] text-[var(--ink)] sm:text-6xl">
+              Today
+            </h1>
+          </div>
+        </div>
+
+        <div className="hidden gap-2 sm:flex">
+          <div className="glass-chip rounded-full px-4 py-2 text-sm text-[var(--muted)]">
+            <span className="font-semibold text-[var(--ink)]">{stats.active}</span> open
+          </div>
+          <div className="glass-chip rounded-full px-4 py-2 text-sm text-[var(--muted)]">
+            <span className="font-semibold text-[var(--ink)]">{stats.completed}</span> done
+          </div>
+        </div>
       </header>
 
-      <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-card)]">
-        <div className="border-b border-[var(--border)] bg-[var(--surface-muted)]/60 px-5 py-5">
+      <div className="glass-panel overflow-hidden rounded-[2rem]">
+        <div className="relative z-10 border-b border-[var(--border)] px-5 py-5 sm:px-6">
           <TodoInput onAdd={addTodo} />
         </div>
 
-        <ul className="space-y-3 px-5 py-5">
+        <ul className="relative z-10 space-y-3 px-5 py-5 sm:px-6">
           {todos.length === 0 ? (
             <EmptyState filter={filter} />
           ) : (
@@ -71,11 +79,11 @@ export function TodoApp() {
         <TodoFilters filter={filter} onChange={setFilter} stats={stats} />
 
         {stats.completed > 0 && (
-          <div className="border-t border-[var(--border)] px-5 py-3 text-right">
+          <div className="relative z-10 border-t border-[var(--border)] px-5 py-3 text-right sm:px-6">
             <button
               type="button"
               onClick={clearCompleted}
-              className="text-sm font-medium text-[var(--danger)] transition-colors hover:text-[var(--danger-hover)]"
+              className="rounded-full px-3 py-1.5 text-sm font-semibold text-[var(--danger)] transition-colors hover:bg-[var(--danger-soft)] hover:text-[var(--danger-hover)]"
             >
               Очистить выполненные ({stats.completed})
             </button>
@@ -83,15 +91,13 @@ export function TodoApp() {
         )}
       </div>
 
-      <footer className="mt-8 text-center text-sm text-[var(--muted)]">
-        {stats.total > 0 ? (
-          <p>
-            Всего {stats.total} · Активных {stats.active} · Готовых {stats.completed}
-          </p>
-        ) : (
-          <p>Двойной клик по задаче — редактирование</p>
-        )}
-      </footer>
+      {stats.total > 0 && (
+        <footer className="mt-5 flex justify-center text-sm text-[var(--muted)] sm:hidden">
+          <div className="glass-chip rounded-full px-4 py-2">
+            {stats.active} open · {stats.completed} done
+          </div>
+        </footer>
+      )}
     </div>
   );
 }

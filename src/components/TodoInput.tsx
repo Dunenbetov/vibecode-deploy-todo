@@ -26,12 +26,12 @@ export function TodoInput({ onAdd }: TodoInputProps) {
         onChange={(event) => setValue(event.target.value)}
         placeholder="Что нужно сделать?"
         autoComplete="off"
-        className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-5 py-4 pr-28 text-base text-[var(--ink)] shadow-[var(--shadow-soft)] outline-none transition-all duration-200 placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:ring-4 focus:ring-[var(--accent-ring)]"
+        className="glass-chip w-full rounded-[1.35rem] px-5 py-4 pr-28 text-base text-[var(--ink)] outline-none transition-all duration-300 placeholder:text-[var(--muted)] focus:border-[var(--border-strong)] focus:ring-4 focus:ring-[var(--accent-ring)]"
       />
       <button
         type="submit"
         disabled={!value.trim()}
-        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-xl bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-40"
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-[1rem] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_28px_var(--accent-muted)] transition-all duration-300 hover:-translate-y-[52%] hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:-translate-y-1/2"
       >
         Добавить
       </button>
