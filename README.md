@@ -36,4 +36,21 @@ npm run build
 
 Конфигурация: [`.cursor/mcp.json`](.cursor/mcp.json)
 
-Для GitHub MCP нужна переменная окружения `GITHUB_TOKEN` с Personal Access Token.
+### Подключение MCP в Cursor
+
+1. Установите переменную окружения с GitHub PAT:
+   ```bash
+   export GITHUB_TOKEN="ghp_ваш_токен"
+   ```
+2. Перезапустите Cursor, чтобы подхватить `.cursor/mcp.json`.
+3. В **Settings → MCP** нажмите `Needs login` у сервера `vercel` и авторизуйтесь.
+4. Попросите агента выполнить:
+   - создать репозиторий `vibecode-deploy-todo` через GitHub MCP;
+   - запушить код;
+   - задеплоить проект через Vercel MCP.
+
+### Альтернатива через CLI
+
+```bash
+npx vercel deploy --prod
+```
